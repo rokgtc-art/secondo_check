@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>비밀이야 부티크 | Bimirya Boutique</title>
+    <meta
+      name="description"
+      content="비밀이야 부티크 대시보드 - 정적 웹사이트 기반 다크 모드 대시보드"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="topbar">
+        <div class="brand">
+          <p class="eyebrow">Boutique Dashboard</p>
+          <h1>비밀이야 부티크</h1>
+          <p class="subtitle">Bimirya Boutique</p>
+        </div>
+
+        <div class="status-wrap">
+          <div class="status-card">
+            <p class="status-label">오늘 정보</p>
+            <strong id="currentDate">-</strong>
+            <span id="currentTime">-</span>
+          </div>
+
+          <div class="status-card status-card-accent">
+            <p class="status-label">근무 인원</p>
+            <strong>금일 근무 인원 <span id="staffCount">5</span>명</strong>
+            <span>기본값 표시</span>
+          </div>
+        </div>
+      </header>
+
+      <main class="dashboard">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Overview</p>
+            <h2>카테고리 현황</h2>
+          </div>
+          <p class="section-note">현재는 임시 데이터로 구성되어 있습니다.</p>
+        </div>
+
+        <section id="dashboardGrid" class="dashboard-grid" aria-live="polite"></section>
+      </main>
+    </div>
+
+    <template id="cardTemplate">
+      <article class="dashboard-card">
+        <div class="card-top">
+          <h3 class="card-title"></h3>
+          <span class="card-chip">Ready</span>
+        </div>
+        <p class="card-metric"></p>
+        <p class="card-note"></p>
+      </article>
+    </template>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
