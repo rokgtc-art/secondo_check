@@ -20,31 +20,36 @@
     <div class="page-shell">
       <header class="topbar">
         <div class="brand">
-          <p class="eyebrow">Boutique Dashboard</p>
-          <h1>비밀이야 부티크</h1>
-          <p class="subtitle">Bimirya Boutique</p>
+          <p class="eyebrow">Bimirya Boutique Dashboard</p>
+          <h1>비밀이야부티크</h1>
         </div>
 
-        <div class="status-wrap">
-          <div class="status-card">
-            <p class="status-label">오늘 정보</p>
-            <strong id="currentDate">-</strong>
-            <span id="currentTime">-</span>
-          </div>
-
-          <div class="status-card status-card-accent">
-            <p class="status-label">근무 인원</p>
-            <strong>금일 근무 인원 <span id="staffCount">5</span>명</strong>
-            <span>기본값 표시</span>
-          </div>
+        <div class="status-card summary-card">
+          <p class="status-label">당일 날짜 총 매출</p>
+          <strong id="dailySales">0원</strong>
+          <span>그날의 매출 현황</span>
         </div>
       </header>
+
+      <section class="info-row">
+        <div class="status-card">
+          <p class="status-label">오늘 정보</p>
+          <strong id="currentDate">-</strong>
+          <span id="currentTime">-</span>
+        </div>
+
+        <div class="status-card status-card-accent">
+          <p class="status-label">근무 인원</p>
+          <strong>금일 근무 인원 <span id="staffCount">5</span>명</strong>
+          <span>기본값 표시</span>
+        </div>
+      </section>
 
       <main class="dashboard">
         <div class="section-head">
           <div>
             <p class="eyebrow">Overview</p>
-            <h2>카테고리 현황</h2>
+            <h2>품목별 출고</h2>
           </div>
           <p class="section-note">현재는 임시 데이터로 구성되어 있습니다.</p>
         </div>
@@ -57,7 +62,7 @@
       <article class="dashboard-card">
         <div class="card-top">
           <h3 class="card-title"></h3>
-          <span class="card-chip">Ready</span>
+          <span class="card-chip"></span>
         </div>
         <p class="card-metric"></p>
         <p class="card-note"></p>
