@@ -22,7 +22,7 @@ const dashboardGridElement = document.querySelector("#dashboardGrid");
 const cardTemplate = document.querySelector("#cardTemplate");
 
 function formatCurrency(value) {
-  return `${new Intl.NumberFormat("ko-KR").format(value)}원`;
+  return `${new Intl.NumberFormat("ko-KR").format(value)} 원`;
 }
 
 function formatQuantity(value) {
