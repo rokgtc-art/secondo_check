@@ -147,6 +147,10 @@ body::before {
   letter-spacing: -0.04em;
 }
 
+.summary-card span {
+  margin-top: 0;
+}
+
 .dashboard {
   border-radius: var(--radius-xl);
   padding: 28px;
@@ -224,6 +228,15 @@ body::before {
   font-size: 1.4rem;
   font-weight: 700;
   letter-spacing: -0.03em;
+}
+
+.card-label {
+  margin: 0 0 6px;
+  color: var(--soft);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 
 .card-note {

@@ -1,21 +1,22 @@
 const dashboardData = {
-  staffCount: 5,
+  staffCount: 12,
   dailySales: 0,
   cards: [
-    { name: "트러플", quantity: 0, sales: 0, note: "금일 출고 대기" },
-    { name: "건버섯", quantity: 0, sales: 0, note: "금일 출고 대기" },
-    { name: "아무르", quantity: 0, sales: 0, note: "금일 출고 대기" },
-    { name: "카비아리", quantity: 0, sales: 0, note: "금일 출고 대기" },
-    { name: "테레보르마네", quantity: 0, sales: 0, note: "금일 출고 대기" },
-    { name: "르끌로드로르", quantity: 0, sales: 0, note: "금일 출고 대기" },
-    { name: "지아코마르코사", quantity: 0, sales: 0, note: "금일 출고 대기" },
-    { name: "기타", quantity: 0, sales: 0, note: "금일 출고 대기" },
+    { label: "Truffle", name: "트러플", quantity: 0, sales: 0, note: "금일 출고 대기" },
+    { label: "Dried Mushroom", name: "건버섯", quantity: 0, sales: 0, note: "금일 출고 대기" },
+    { label: "Amour", name: "아무르", quantity: 0, sales: 0, note: "금일 출고 대기" },
+    { label: "Caviari", name: "카비아리", quantity: 0, sales: 0, note: "금일 출고 대기" },
+    { label: "Tere Bormane", name: "테레보르마네", quantity: 0, sales: 0, note: "금일 출고 대기" },
+    { label: "Le Clos D'or", name: "르끌로드로르", quantity: 0, sales: 0, note: "금일 출고 대기" },
+    { label: "Giacomarcosa", name: "지아코마르코사", quantity: 0, sales: 0, note: "금일 출고 대기" },
+    { label: "Others", name: "기타", quantity: 0, sales: 0, note: "금일 출고 대기" },
   ],
 };
 
 const currentDateElement = document.querySelector("#currentDate");
 const currentTimeElement = document.querySelector("#currentTime");
 const staffCountElement = document.querySelector("#staffCount");
+const dailySalesDateElement = document.querySelector("#dailySalesDate");
 const dailySalesElement = document.querySelector("#dailySales");
 const dashboardGridElement = document.querySelector("#dashboardGrid");
 const cardTemplate = document.querySelector("#cardTemplate");
@@ -30,13 +31,15 @@ function formatQuantity(value) {
 
 function updateClock() {
   const now = new Date();
-
-  currentDateElement.textContent = new Intl.DateTimeFormat("ko-KR", {
+  const formattedDate = new Intl.DateTimeFormat("ko-KR", {
     year: "numeric",
     month: "long",
     day: "numeric",
     weekday: "long",
   }).format(now);
+
+  currentDateElement.textContent = formattedDate;
+  dailySalesDateElement.textContent = formattedDate;
 
   currentTimeElement.textContent = new Intl.DateTimeFormat("ko-KR", {
     hour: "2-digit",
@@ -52,6 +55,7 @@ function renderCards(cards) {
     const card = cardTemplate.content.firstElementChild.cloneNode(true);
 
     card.querySelector(".card-title").textContent = cardData.name;
+    card.querySelector(".card-label").textContent = cardData.label;
     card.querySelector(".card-chip").textContent = formatCurrency(cardData.sales);
     card.querySelector(".card-metric").textContent = formatQuantity(cardData.quantity);
     card.querySelector(".card-note").textContent = cardData.note;
