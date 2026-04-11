@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>업장별 출고 | 비밀이야 부티크</title>
+    <meta
+      name="description"
+      content="비밀이야 부티크 대시보드 - 업장별 출고 현황"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="topbar">
+        <div class="brand">
+          <p class="eyebrow">Bimirya Boutique Dashboard</p>
+          <h1>업장별 출고 대시보드</h1>
+        </div>
+
+        <div class="status-card summary-card">
+          <p class="status-label">Reference Date</p>
+          <span id="venueDate">-</span>
+          <strong id="venueSales">0 원</strong>
+        </div>
+      </header>
+
+      <nav class="page-nav" aria-label="Dashboard Navigation">
+        <a class="page-link" href="./index.html">품목별 출고</a>
+        <a class="page-link page-link-active" href="./venues.html">업장별 출고</a>
+      </nav>
+
+      <main class="dashboard">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Venues</p>
+            <h2>업장별 출고</h2>
+          </div>
+          <p id="venueSectionNote" class="section-note">업장별 출고 데이터를 불러오는 중입니다.</p>
+        </div>
+
+        <section id="venueGrid" class="dashboard-grid venue-grid" aria-live="polite"></section>
+      </main>
+    </div>
+
+    <template id="venueCardTemplate">
+      <article class="dashboard-card venue-card">
+        <div class="card-top">
+          <h3 class="card-title"></h3>
+          <span class="card-chip">
+            <span class="card-sales"></span>
+          </span>
+        </div>
+        <p class="card-label">Venue Shipment</p>
+        <p class="card-note"></p>
+        <ul class="card-list"></ul>
+      </article>
+    </template>
+
+    <script src="./venues.js"></script>
+  </body>
+</html>
