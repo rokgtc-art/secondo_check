@@ -9,24 +9,26 @@ const dashboardData = {
   dailySales: 0,
   cards: [
     { label: "Truffles", name: "트러플", quantity: 0, sales: 0, note: "금일 출고 대기" },
-    { label: "Dried Mushroom", name: "건버섯", quantity: 0, sales: 0, note: "금일 출고 대기" },
     { label: "Amour", name: "아무르", quantity: 0, sales: 0, note: "금일 출고 대기" },
     { label: "Kaviari", name: "카비아리", quantity: 0, sales: 0, note: "금일 출고 대기" },
     { label: "Terre Bormane", name: "테레보르마네", quantity: 0, sales: 0, note: "금일 출고 대기" },
     { label: "Le Clos de Laure", name: "르끌로드로르", quantity: 0, sales: 0, note: "금일 출고 대기" },
     { label: "Marco Giacosa", name: "마르코 지아코사", quantity: 0, sales: 0, note: "금일 출고 대기" },
+    { label: "Dried Mushroom", name: "건버섯", quantity: 0, sales: 0, note: "금일 출고 대기" },
+    { label: "Frozen Truffles", name: "냉동트러플", quantity: 0, sales: 0, note: "금일 출고 대기" },
     { label: "Etc", name: "기타", quantity: 0, sales: 0, note: "금일 출고 대기" },
   ],
 };
 
 const categoryRules = [
   { key: "트러플", label: "Truffles", match: ["트러플"] },
-  { key: "건버섯", label: "Dried Mushroom", match: ["모렐", "포르치니", "트럼펫", "지롤"] },
   { key: "아무르", label: "Amour", match: ["아무르"] },
   { key: "카비아리", label: "Kaviari", match: ["카비아리"] },
   { key: "테레보르마네", label: "Terre Bormane", match: ["보르마네", "발사믹", "시트리노", "보르마노"] },
   { key: "르끌로드로르", label: "Le Clos de Laure", match: ["잼"] },
   { key: "마르코 지아코사", label: "Marco Giacosa", match: ["파스타"] },
+  { key: "건버섯", label: "Dried Mushroom", match: ["모렐", "포르치니", "트럼펫", "지롤"] },
+  { key: "냉동트러플", label: "Frozen Truffles", match: ["냉동", "페리고", "썸머", "중국트러플"] },
   { key: "기타", label: "Etc", match: [] },
 ];
 
@@ -44,7 +46,7 @@ function formatCurrency(value) {
 }
 
 function getQuantityUnit(categoryName) {
-  return ["트러플", "건버섯"].includes(categoryName) ? "g" : "개";
+  return ["트러플", "건버섯", "냉동트러플"].includes(categoryName) ? "g" : "개";
 }
 
 function formatQuantity(value, categoryName) {
@@ -65,6 +67,10 @@ function toNumber(value) {
 }
 
 function classifyCategory(productName = "") {
+  if (["냉동", "페리고", "썸머", "중국트러플"].some((keyword) => productName.includes(keyword))) {
+    return categoryRules.find((category) => category.key === "냉동트러플");
+  }
+
   const matchedCategory = categoryRules.find((category) =>
     category.match.some((keyword) => productName.includes(keyword)),
   );
