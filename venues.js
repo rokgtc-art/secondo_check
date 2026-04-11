@@ -9,6 +9,10 @@ const venueSalesElement = document.querySelector("#venueSales");
 const venueSectionNoteElement = document.querySelector("#venueSectionNote");
 const venueGridElement = document.querySelector("#venueGrid");
 const venueCardTemplate = document.querySelector("#venueCardTemplate");
+const sortToggleElement = document.querySelector("#sortToggle");
+
+let currentSortMode = "default";
+let latestSummary = null;
 
 function formatCurrency(value) {
   return `${new Intl.NumberFormat("ko-KR").format(value)} 원`;
@@ -92,6 +96,7 @@ function summarizeVenues(rows) {
         name: venueName,
         sales: 0,
         products: new Set(),
+        order: venueMap.size,
       });
     }
 
@@ -107,14 +112,30 @@ function summarizeVenues(rows) {
       sales: venue.sales,
       note: `${venue.products.size}개 제품 출고`,
       products: [...venue.products].sort((a, b) => a.localeCompare(b, "ko-KR")),
+      order: venue.order,
     }))
-    .sort((a, b) => b.sales - a.sales);
+    .sort((a, b) => a.order - b.order);
 
   return {
     latestDate,
     totalSales,
     venues,
   };
+}
+
+function getSortedVenues(venues) {
+  const copiedVenues = [...venues];
+
+  if (currentSortMode === "sales") {
+    return copiedVenues.sort((a, b) => b.sales - a.sales || a.order - b.order);
+  }
+
+  return copiedVenues.sort((a, b) => a.order - b.order);
+}
+
+function updateSortToggleLabel() {
+  sortToggleElement.textContent =
+    currentSortMode === "default" ? "발주 순서 정렬" : "매출액 정렬";
 }
 
 function renderFallback() {
@@ -151,19 +172,30 @@ function renderVenueCards(venues) {
 
 async function initVenueDashboard() {
   renderFallback();
+  updateSortToggleLabel();
 
   try {
     const rows = await fetchRows();
     const summary = summarizeVenues(rows);
+    latestSummary = summary;
 
     venueDateElement.textContent = formatDisplayDate(summary.latestDate);
     venueSalesElement.textContent = formatCurrency(summary.totalSales);
-    renderVenueCards(summary.venues);
-    venueSectionNoteElement.textContent = `${summary.latestDate} 기준 업장 ${summary.venues.length}곳`;
+    renderVenueCards(getSortedVenues(summary.venues));
+    venueSectionNoteElement.textContent = `금일 발주 업장 ${summary.venues.length} 개`;
   } catch (error) {
     console.error(error);
     venueSectionNoteElement.textContent = "Supabase 연결 실패 · 업장 데이터를 불러오지 못했습니다.";
   }
 }
+
+sortToggleElement.addEventListener("click", () => {
+  currentSortMode = currentSortMode === "default" ? "sales" : "default";
+  updateSortToggleLabel();
+
+  if (latestSummary) {
+    renderVenueCards(getSortedVenues(latestSummary.venues));
+  }
+});
 
 initVenueDashboard();
